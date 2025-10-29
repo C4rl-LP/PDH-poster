@@ -22,9 +22,11 @@ F = np.pi * np.sqrt(np.sqrt(R1 * R2 ))/(1- np.sqrt(R1 * R2)) # se R1 = R2  F = p
 # F = FSR/FWHM 
 FWHM = FSR/F
 
-# função de tranferencia de refletividade no FPI
 
-def H(omega):
+
+def H(omega): # função de tranferencia de refletividade no FPI
     phi = 2*np.pi * omega/FSR
     return r1 - (t1*t2*r2*np.exp(-2j*phi))/(1- r1*r2*np.exp(-2j*phi))
+
+
 
