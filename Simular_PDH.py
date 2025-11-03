@@ -18,7 +18,7 @@ T2 = 1 - R2
 t2 = np.sqrt(T2)
 F = np.pi * np.sqrt(np.sqrt(R1 * R2)) / (1 - np.sqrt(R1 * R2))
 FWHM = FSR / F
-Omega_m =  10e6 # mod freq
+Omega_m =  20*FWHM # mod freq
 beta = 0.3                # indice de modulação
 
 # Finesse e largura de linha
@@ -36,9 +36,9 @@ R = np.abs(H(omega))**2  # Potência refletida normalizada
 # Gráfico
 plt.figure(figsize=(8,4 ))
 plt.plot(omega / FSR, R, 'b')
-plt.title('Potência Refletida no Fabry–Perot')
-plt.xlabel(f'Deslocamento de frequência (unidades de FSR = {FSR/10**9 :.2f} GHz)')
-plt.ylabel('Potência refletida (normalizada) |H(ω)|²')
+plt.title('Reflected Power in the Fabry–Perot')
+plt.xlabel(f'Frequency detuning (units of FSR = {FSR/10**9 :.2f} GHz)')
+plt.ylabel('Reflected Power |H(ω)|²')
 plt.grid(True)
 plt.xlim(-1.5, 1.5)
 plt.show()
@@ -79,7 +79,7 @@ fs = 200e6  # taxa de amostragem
 t = np.arange(0, 20e-6, 1/fs)  # 20 µs
 
 # Frequência angular da portadora sendo varrida
-detunings = np.linspace(-FSR/13, FSR/13, 1000)  # em Hz
+detunings = np.linspace(-0.02*FSR, 0.02*FSR, 1000)  # em Hz
 PDH_error = []
 
 def erro_aprox(om):
@@ -109,9 +109,9 @@ plt.figure(figsize=(7,5))
 plt.plot(detunings / FSR, PDH_error)
 plt.legend()
 plt.axhline(0, color='k', lw=0.8)
-plt.xlabel("Desvio de frequência (Δν / FSR)")
-plt.ylabel("Sinal de erro PDH (a.u.)")
-plt.title("Simulação do sinal Pound–Drever–Hall")
+plt.xlabel("Frequency detuning (Δν / FSR)")
+plt.ylabel("PDH error signal")
+plt.title("Simulation of the Pound–Drever–Hall signal")
 plt.grid(True)
 plt.show()
 
